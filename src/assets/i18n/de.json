@@ -25,7 +25,8 @@
 
   "TUTORIAL_CONTINUE_BUTTON": "Fortfahren",
 
-  "WELCOME_INTRO": "Der Startpunkt für Deine nächste tolle Ionic App",
+  "WELCOME_INTRO": "Starte das Spiel und smashe los!",
+  "BTN_GO": "Los gehts",
 
   "SETTINGS_TITLE": "Einstellungen",
   "SETTINGS_OPTION1": "Option 1",
