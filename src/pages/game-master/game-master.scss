@@ -1,0 +1,18 @@
+page-game-master {
+    .toolbar-background {
+        background-color: map-get($colors, danger)!important;
+    }
+
+    .toolbar-title {
+        color: whitesmoke;
+    }
+
+    .item , ion-item-sliding {
+        background-color: transparent !important;
+    }
+
+    p, h2 {
+        color: whitesmoke !important;
+    }
+
+}

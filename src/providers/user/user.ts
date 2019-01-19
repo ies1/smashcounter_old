@@ -2,7 +2,19 @@ import 'rxjs/add/operator/toPromise';
 
 import { Injectable } from '@angular/core';
 
-import { Api } from '../api/api';
+export interface Player {
+  name: string,
+  image: string,
+  smashes: number,
+  games: number,
+  wins: number,
+  active_smashes?: number
+}
+
+export interface Games {
+  date: Date,
+  players: Player[]
+}
 
 /**
  * Most apps have the concept of a User. This is a simple provider
@@ -26,59 +38,48 @@ import { Api } from '../api/api';
 @Injectable()
 export class User {
   _user: any;
+  _players: Player[] = [];
 
-  constructor(public api: Api) { }
+  constructor() { }
 
-  /**
-   * Send a POST request to our login endpoint with the data
-   * the user entered on the form.
-   */
-  login(accountInfo: any) {
-    let seq = this.api.post('login', accountInfo).share();
+  getPlayers(): Player[] {
+    //todo local storage stuff
 
-    seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
-      if (res.status == 'success') {
-        this._loggedIn(res);
-      } else {
-      }
-    }, err => {
-      console.error('ERROR', err);
+    if (this._players.length === 0)
+      this.createMockPlayers();
+
+    return this._players;
+  }
+
+  createMockPlayers() {
+    this._players.push({
+      name: "Player 1",
+      smashes: 1,
+      games: 1,
+      wins: 0,
+      image: 'assets/img/fighters/mario.png'
     });
 
-    return seq;
-  }
-
-  /**
-   * Send a POST request to our signup endpoint with the data
-   * the user entered on the form.
-   */
-  signup(accountInfo: any) {
-    let seq = this.api.post('signup', accountInfo).share();
-
-    seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
-      if (res.status == 'success') {
-        this._loggedIn(res);
-      }
-    }, err => {
-      console.error('ERROR', err);
+    this._players.push({
+      name: "Player 2",
+      smashes: 0,
+      games: 1,
+      wins: 0,
+      image: 'assets/img/fighters/bowser.png'
     });
 
-    return seq;
+    this._players.push({
+      name: "Player 3",
+      smashes: 2,
+      games: 1,
+      wins: 1,
+      image: 'assets/img/fighters/samus.png'
+    });
   }
 
-  /**
-   * Log the user out, which forgets the session
-   */
-  logout() {
-    this._user = null;
-  }
+  addPlayer(p: Player) {
+    //TODO Local storage stuff
 
-  /**
-   * Process a login/signup response to store user data
-   */
-  _loggedIn(resp) {
-    this._user = resp.user;
+    this._players.push(p);
   }
 }

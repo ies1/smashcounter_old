@@ -1,0 +1,13 @@
+page-statistics {
+    .toolbar-background {
+        background-color: map-get($colors, primary)!important;
+    }
+
+    .toolbar-title {
+        color: whitesmoke;
+    }
+
+    p {
+        color: whitesmoke !important;
+    }
+}

@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Spieler erfassen</ion-title>
+        <ion-buttons start>
+        <button ion-button (click)="cancel()">
+            <ion-icon name="backspace"></ion-icon>
+        </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="dark-bg">
+        <ion-scroll [hidden]="hideSelect" scrollX="true" direction="x">
+            <ion-card #activeAvatar *ngFor="let imgObj of urlAvatars" (click)="selectAvatar(item, activeAvatar)">
+                <ion-card-content>
+                    <ion-card-title>
+                    {{ imgObj.title | uppercase }}
+                    </ion-card-title>
+                    <img [src]="imgObj.url" class="profile-image"/>
+                </ion-card-content>
+            </ion-card>
+        </ion-scroll>
+        <form [formGroup]="form" (ngSubmit)="createUser()">
+          <div [hidden]="!hideSelect" class="profile-image-wrapper" (click)="chooseAvatar()">
+            <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
+              <ion-icon name="add"></ion-icon>
+              <div>
+                  Avatar auswählen
+              </div>
+            </div>
+            <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
+          </div>
+          <ion-list>
+            <ion-item>
+              <ion-input type="text" placeholder="Spieler X" formControlName="name"></ion-input>
+            </ion-item>
+          </ion-list>
+        </form>
+
+        <ion-fab right bottom [hidden]="!isReadyToSave">
+            <button ion-fab mini color="secondary" (click)="done()"><ion-icon name="checkmark"></ion-icon></button>
+        </ion-fab>
+</ion-content>
+
