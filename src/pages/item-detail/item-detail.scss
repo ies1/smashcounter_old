@@ -1,4 +1,11 @@
 page-item-detail {
+  .toolbar-background {
+    background-color: map-get($colors, third)!important;
+  }
+  .toolbar-title {
+    color: whitesmoke;
+}
+
   .item-profile {
     width: 100%;
     background-position: center center;
@@ -8,7 +15,31 @@ page-item-detail {
 
   .item-detail {
     width: 100%;
-    background: white;
+    background: rgba(227, 151, 24, 0.2);
+    color: whitesmoke;
     position: absolute;
+  }
+
+  .item-wrapper {
+    background-color: transparent !important;
+  }
+
+  .player-list {
+    background-color: transparent !important;
+  }
+
+  .list {
+    margin-top: 110px !important;
+  }
+
+  h2, p {
+    color: whitesmoke;
+  }
+
+  .avatar-img {
+    border-radius: 7px !important;
+    width: auto !important;
+    height: 60px !important;
+    margin: auto;
   }
 }

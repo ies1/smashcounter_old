@@ -1,35 +1,33 @@
 page-item-create {
-  .profile-image-wrapper {
-    text-align: center;
-    margin: 20px 0;
+  form {
+    height: 100%;
+  }
 
-    .profile-image {
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
+  .toolbar-background {
+      background-color: map-get($colors, danger)!important;
+  }
 
-      display: inline-block;
+  .toolbar-title {
+      color: whitesmoke;
+  }
 
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-    }
+  .item {
+      background-color: transparent !important;
+      color: whitesmoke !important;
+  }
 
-    .profile-image-placeholder {
-      display: inline-block;
+  .splash-bg {
+    position: relative;
+    background: url('../assets/img/splashbg4.jpg') no-repeat transparent;
+    background-size: cover;
+    height: 45%;
+    z-index: 1;
+    background-repeat: repeat-x;
+    animation: animatedBackground 40s linear infinite;
+  }
 
-      background-color: #eee;
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-
-      font-size: 12px;
-
-      ion-icon {
-        font-size: 44px;
-        margin-bottom: -10px;
-        margin-top: 10px;
-      }
-    }
+  @keyframes animatedBackground {
+    from { background-position: 0 0; }
+    to { background-position: 100% 0; }
   }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ViewController, ModalController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Player } from '../../providers/user/user';
+import { Player, User } from '../../providers/user/user';
 import { AVATARS } from '../../providers/items/items';
 
 @IonicPage()
@@ -11,26 +11,32 @@ import { AVATARS } from '../../providers/items/items';
 })
 export class UserCreatePage {
 
-  isReadyToSave = true;
+  isReadyToSave = false;
 
-  item: Player;
   hideSelect = true;
   avatars: Array<string> = [];
   urlAvatars: Array<any> = [];
   currentActiveAvatar: any;
+  chosenAvatar: string;
 
   form: FormGroup;
   
   constructor(public navCtrl: NavController, 
               public viewCtrl: ViewController,
               public formBuilder: FormBuilder,
-              public modalCtrl: ModalController) {
+              public modalCtrl: ModalController,
+              public userMgmt: User) {
 
     
     this.form = formBuilder.group({
         profilePic: ['', Validators.required],
         name: ['', Validators.required]
     });
+
+    // Watch the form for changes, and
+    this.form.valueChanges.subscribe((v) => {
+        this.isReadyToSave = this.form.valid;
+      });
 
     this.getAvatars();
     for (let i = 0; i < this.avatars.length; i++) {
@@ -47,20 +53,31 @@ export class UserCreatePage {
 
 
   done() {
+    if (this.form.valid) {
+        let newPlayer: Player = {
+            name: this.form.controls['name'].value,
+            image: this.form.controls['profilePic'].value,
+            games: 0,
+            smashes: 0,
+            wins: 0
+        }
 
+        this.userMgmt.addPlayer(newPlayer);
+
+        this.viewCtrl.dismiss();
+    }
   }
 
-  createUser() {
-
-  }
-
-  selectAvatar(avatar, activeAvatar) {
+  selectAvatar(imgObj, activeAvatar) {
     if (typeof this.currentActiveAvatar !== "undefined"){
         this.currentActiveAvatar.classList.remove('activeAvatar')
     }
     this.currentActiveAvatar = activeAvatar;
     this.currentActiveAvatar.classList.add('activeAvatar');
-  }
+
+    this.form.patchValue({ 'profilePic': imgObj.url });
+    this.hideSelect = true;
+}
 
   chooseAvatar() {
     this.hideSelect = false;

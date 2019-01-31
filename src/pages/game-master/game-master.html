@@ -11,16 +11,16 @@
     <ion-item-sliding *ngFor="let item of currentItems">
       <button ion-item (click)="openItem(item)">
         <ion-avatar item-start>
-          <img [src]="item.profilePic" />
+          <img [src]="item.img" />
         </ion-avatar>
-        <h2>{{item.name}}</h2>
-        <p>{{item.about}}</p>
+        <h2>{{item.date}}</h2>
+        <p>{{item.place}}</p>
         <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
       </button>
 
       <ion-item-options>
         <button ion-button color="danger" (click)="deleteItem(item)">
-          {{ 'DELETE_BUTTON' | translate }}
+          Löschen
         </button>
       </ion-item-options>
     </ion-item-sliding>

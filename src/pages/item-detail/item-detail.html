@@ -1,18 +1,37 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ item.name }}</ion-title>
+    <ion-title>Smash Counter</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content>
-  <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'">
+<ion-content class="dark-bg">
+  <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.img + ')'">
   </div>
 
   <div class="item-detail" padding>
-    <h2>{{item.name}}</h2>
-    <p>{{item.about}}</p>
+    <h2>{{item.date}}</h2>
+    <p>{{item.place}}</p>
   </div>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let player of activePlayers" >
+      <ion-item class="player-list">
+        <ion-avatar item-start>
+            <img class="avatar-img" [src]="player.image" />
+        </ion-avatar>
+        <h2>{{player.name}}</h2>
+        <p>SMASHES: {{player.smashes}}</p>
+      </ion-item>
+
+      <ion-item-options>
+        <button ion-button color="third">
+          Entfernen
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
 </ion-content>
