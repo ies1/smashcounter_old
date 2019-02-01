@@ -59,7 +59,10 @@ export class UserCreatePage {
     if (this.form.valid) {
         let newPlayer: Player = {
             name: this.form.controls['name'].value,
-            avatar: this.form.controls['avatar'].value
+            avatar: this.form.controls['avatar'].value,
+            games: 0,
+            smashes: 0,
+            wins: 0
         }
 
         this.db.addPlayer(newPlayer);

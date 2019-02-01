@@ -1,7 +1,6 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, ModalController } from 'ionic-angular';
 
-import { Items } from '../../providers';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Player, Api, PlayerGame } from '../../providers/api/api';
 
@@ -26,7 +25,8 @@ export class ItemDetailPage {
               public statusBar: StatusBar,
               public db: Api,
               public zone: NgZone,
-              public event: Events) {
+              public event: Events,
+              public modalCtrl: ModalController) {
 
     this.item = navParams.get('item');
 
@@ -49,6 +49,8 @@ export class ItemDetailPage {
   }
 
   getPGforGame() {
+    this.activePlayerGame = [];
+    this.activePlayers = [];
     for (let pg of this.pgTable) {
       let pgId = pg.game.id;
       if (this.item._id == pgId) {
@@ -69,7 +71,106 @@ export class ItemDetailPage {
   }
 
   addPlayerToGame() {
+    let addModal = this.modalCtrl.create('PlayerAddPage', {
+      players: this.activePlayers,
+      game: this.item
+    });
+    addModal.onDidDismiss(item => {
+      if (item) {
+        console.log(item);
+      }
+    })
+    addModal.present();
+  }
 
+  addSmash(pg: PlayerGame, p: Player) {
+
+    console.log('old smash count', p.smashes, pg.smashes);
+
+    p.smashes = p.smashes + 1;
+    pg.smashes = pg.smashes + 1;
+
+    this.db.playersRef.doc(`${p._id}`).update({smashes: p.smashes})
+      .then(() => {
+        console.log('new smash overall count', p.smashes);
+      }).catch((err) => {
+        console.error("ERROR DURING UPDATE", err);
+      });
+    
+    this.db.player_gameRef.doc(`${pg._id}`).update({smashes: pg.smashes})
+      .then(() => {
+        console.log('new smash count', pg.smashes);
+      }).catch((err) => {
+        console.error("ERROR DURING UPDATE", err);
+      });
+  }
+
+  remSmash(pg: PlayerGame, p: Player) {
+    if (p.smashes > 0 && p.smashes > 0) {
+
+      console.log('old smash count', p.smashes, pg.smashes);
+
+      p.smashes = p.smashes - 1;
+      pg.smashes = pg.smashes - 1;
+
+      this.db.playersRef.doc(`${p._id}`).update({smashes: p.smashes})
+        .then(() => {
+          console.log('new smash overall count', p.smashes);
+        }).catch((err) => {
+          console.error("ERROR DURING UPDATE", err);
+        });
+      
+      this.db.player_gameRef.doc(`${pg._id}`).update({smashes: pg.smashes})
+        .then(() => {
+          console.log('new smash count', pg.smashes);
+        }).catch((err) => {
+          console.error("ERROR DURING UPDATE", err);
+        });
+    }
+  }
+
+  addDoubler(pg: PlayerGame, p: Player) {
+    console.log('old doubler count', p.smashes, pg.doubler);
+
+    p.smashes = p.smashes + 2;
+    pg.doubler = pg.doubler + 1;
+
+    this.db.playersRef.doc(`${p._id}`).update({smashes: p.smashes})
+      .then(() => {
+        console.log('new smash overall count', p.smashes);
+      }).catch((err) => {
+        console.error("ERROR DURING UPDATE", err);
+      });
+
+    this.db.player_gameRef.doc(`${pg._id}`).update({doubler: pg.doubler})
+      .then(() => {
+        console.log('new doubler count', pg.doubler);
+      }).catch((err) => {
+        console.error("ERROR DURING UPDATE", err);
+      });
+  }
+
+  remDoubler(pg: PlayerGame, p: Player) {
+    console.log('old doubler count', p.smashes, pg.doubler);
+
+    if (p.smashes > 1 && pg.doubler > 0) {
+      p.smashes = p.smashes - 2;
+      pg.doubler = pg.doubler - 1;
+
+      this.db.playersRef.doc(`${p._id}`).update({smashes: p.smashes})
+        .then(() => {
+          console.log('new smash overall count', p.smashes);
+        }).catch((err) => {
+          console.error("ERROR DURING UPDATE", err);
+        });
+
+      this.db.player_gameRef.doc(`${pg._id}`).update({doubler: pg.doubler})
+        .then(() => {
+          console.log('new doubler count', pg.doubler);
+        }).catch((err) => {
+          console.error("ERROR DURING UPDATE", err);
+        });
+    }
   }
 
 }

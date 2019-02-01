@@ -28,10 +28,10 @@
         <ion-col>
           <p>
             SMASHES: {{pg.smashes}} 
-            <button ion-button float-right color="third" class="ar-button">
+            <button ion-button float-right color="third" class="ar-button" (click)="remSmash(pg, activePlayers[i])">
                 <ion-icon slot="icon-only" name="remove"></ion-icon>
             </button>
-            <button ion-button float-right color="third" class="ar-button">
+            <button ion-button float-right color="third" class="ar-button" (click)="addSmash(pg, activePlayers[i])">
                 <ion-icon slot="icon-only" name="add"></ion-icon>
             </button>
           </p>
@@ -39,10 +39,10 @@
         <ion-col>
           <p>
             DOUBLERS: {{pg.doubler}}
-            <button ion-button float-right color="third" class="ar-button">
+            <button ion-button float-right color="third" class="ar-button" (click)="remDoubler(pg, activePlayers[i])">
                 <ion-icon slot="icon-only" name="remove"></ion-icon>
             </button>
-            <button ion-button float-right color="third" class="ar-button">
+            <button ion-button float-right color="third" class="ar-button" (click)="addDoubler(pg, activePlayers[i])">
                 <ion-icon slot="icon-only" name="add"></ion-icon>
             </button>
           </p>

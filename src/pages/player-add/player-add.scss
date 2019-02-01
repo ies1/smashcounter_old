@@ -1,0 +1,39 @@
+page-player-add {
+  form {
+    height: 100%;
+  }
+
+  .toolbar-background {
+      background-color: map-get($colors, third)!important;
+  }
+
+  .toolbar-title {
+      color: whitesmoke;
+  }
+
+  .item {
+      background-color: transparent !important;
+      color: whitesmoke !important;
+  }
+
+  .splash-bg {
+    position: relative;
+    background: url('../assets/img/splashbg4.jpg') no-repeat transparent;
+    background-size: cover;
+    height: 45%;
+    z-index: 1;
+    background-repeat: repeat-x;
+    animation: animatedBackground 40s linear infinite;
+  }
+
+  @keyframes animatedBackground {
+    from { background-position: 0 0; }
+    to { background-position: 100% 0; }
+  }
+
+  ion-avatar img {
+    margin-left: 12px;
+    width: auto !important;
+    border-radius: 0px !important;
+  }
+}

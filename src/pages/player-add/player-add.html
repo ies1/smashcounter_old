@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Spieler hinzufügen</ion-title>
+        <ion-buttons start>
+        <button ion-button (click)="cancel()">
+            <ion-icon name="close-circle"></ion-icon>
+        </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content class="dark-bg">
+    <div class="splash-bg"></div>
+
+    <ion-list>
+        <ion-item class="player-list" *ngFor="let p of addablePlayers" (click)="choosePlayer(p)">
+            <ion-avatar item-start>
+                <img class="avatar-img" [src]="p.avatar" />
+            </ion-avatar>
+            <ion-col>
+                <h2>{{p.name}}</h2>
+            </ion-col>
+        </ion-item>
+        </ion-list>
+</ion-content>

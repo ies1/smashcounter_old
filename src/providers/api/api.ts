@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs-compat';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { Events } from 'ionic-angular';
 
 export interface Player {
   _id?: string;
   name: string,
   avatar: string,
-  smashes?: number,
-  games?: number,
-  wins?: number,
+  smashes: number,
+  games: number,
+  wins: number,
 }
 
 export interface Game {
@@ -23,8 +23,8 @@ export interface Game {
 
 export interface PlayerGame {
   _id?: string;
-  player: any,
-  game: any,
+  player: DocumentReference,
+  game: DocumentReference,
   smashes: number,
   doubler: number,
   tripplos: number,
@@ -110,14 +110,15 @@ export class Api {
   }
 
   addPlayer(player: Player) {
-    this.playersRef.add({
-      name: player.name,
-      avatar: player.avatar
-    })
+    this.playersRef.add(player)
   }
 
   addGame(game: Game) {
     this.gamesRef.add(game);
+  }
+
+  addPlayerGame(pg:PlayerGame) {
+    this.player_gameRef.add(pg);
   }
 
 }
