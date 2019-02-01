@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ViewController, ModalController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Player, User } from '../../providers/user/user';
 import { AVATARS } from '../../providers/items/items';
+import { StatusBar } from '@ionic-native/status-bar';
+import { Player, Api } from '../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -25,11 +26,12 @@ export class UserCreatePage {
               public viewCtrl: ViewController,
               public formBuilder: FormBuilder,
               public modalCtrl: ModalController,
-              public userMgmt: User) {
+              public statusBar: StatusBar,
+              public db: Api) {
 
     
     this.form = formBuilder.group({
-        profilePic: ['', Validators.required],
+        avatar: ['', Validators.required],
         name: ['', Validators.required]
     });
 
@@ -45,6 +47,7 @@ export class UserCreatePage {
             url: `assets/img/fighters/${this.avatars[i]}`  
         });
     }
+
   }
 
   cancel() {
@@ -56,13 +59,10 @@ export class UserCreatePage {
     if (this.form.valid) {
         let newPlayer: Player = {
             name: this.form.controls['name'].value,
-            image: this.form.controls['profilePic'].value,
-            games: 0,
-            smashes: 0,
-            wins: 0
+            avatar: this.form.controls['avatar'].value
         }
 
-        this.userMgmt.addPlayer(newPlayer);
+        this.db.addPlayer(newPlayer);
 
         this.viewCtrl.dismiss();
     }
@@ -75,7 +75,7 @@ export class UserCreatePage {
     this.currentActiveAvatar = activeAvatar;
     this.currentActiveAvatar.classList.add('activeAvatar');
 
-    this.form.patchValue({ 'profilePic': imgObj.url });
+    this.form.patchValue({ 'avatar': imgObj.url });
     this.hideSelect = true;
 }
 
@@ -88,7 +88,7 @@ export class UserCreatePage {
   }
 
   getProfileImageStyle() {
-    return 'url(' + this.form.controls['profilePic'].value + ')'
+    return 'url(' + this.form.controls['avatar'].value + ')'
   }
 
 }

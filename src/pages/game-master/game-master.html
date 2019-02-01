@@ -8,18 +8,18 @@
 
 <ion-content class="dark-bg">
   <ion-list>
-    <ion-item-sliding *ngFor="let item of currentItems">
-      <button ion-item (click)="openItem(item)">
+    <ion-item-sliding *ngFor="let g of games">
+      <button ion-item (click)="openItem(g)">
         <ion-avatar item-start>
-          <img [src]="item.img" />
+          <img [src]="g.img" />
         </ion-avatar>
-        <h2>{{item.date}}</h2>
-        <p>{{item.place}}</p>
-        <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
+        <h2>{{g._dateReadable}}</h2>
+        <p>{{g.place}}</p>
+        <ion-note item-end *ngIf="g.note">{{g.note}}</ion-note>
       </button>
 
       <ion-item-options>
-        <button ion-button color="danger" (click)="deleteItem(item)">
+        <button ion-button color="danger" (click)="deleteItem(g)">
           Löschen
         </button>
       </ion-item-options>

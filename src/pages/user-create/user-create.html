@@ -22,13 +22,13 @@
         </ion-scroll>
         <form [formGroup]="form">
           <div [hidden]="!hideSelect" class="profile-image-wrapper" (click)="chooseAvatar()">
-            <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
+            <div class="profile-image-placeholder" *ngIf="!this.form.controls.avatar.value">
               <ion-icon name="add"></ion-icon>
               <div>
                   Avatar auswählen
               </div>
             </div>
-            <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
+            <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.avatar.value"></div>
           </div>
           <ion-list>
             <ion-item>

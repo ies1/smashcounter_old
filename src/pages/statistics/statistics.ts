@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Settings } from '../../providers';
+import { StatusBar } from '@ionic-native/status-bar';
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -36,7 +37,9 @@ export class StatisticsPage {
     public settings: Settings,
     public formBuilder: FormBuilder,
     public navParams: NavParams,
-    public translate: TranslateService) {
+    public translate: TranslateService,
+    public statusBar: StatusBar) {
+
   }
 
   _buildForm() {
@@ -61,6 +64,7 @@ export class StatisticsPage {
     this.form.valueChanges.subscribe((v) => {
       this.settings.merge(this.form.value);
     });
+
   }
 
   ionViewDidLoad() {

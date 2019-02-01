@@ -9,7 +9,7 @@
   <ion-slides pager="true" dir="{{dir}}">
     <ion-slide class="slide-gradient" *ngFor="let slide of slides">
         <h2 class="slide-content slide-title" [innerHTML]="slide.name"></h2>
-      <img [src]="slide.image" class="slide-image" />
+      <img [src]="slide.avatar" class="slide-image" />
       <p class="slide-content slide-text-title">SMASHES</p>
       <p class="slide-content slide-text" [innerHTML]="slide.smashes"></p>
       <p class="slide-content slide-text-title">GAMES</p>

@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController } from 'ionic-angular';
+import { Component, NgZone } from '@angular/core';
+import { IonicPage, ModalController, NavController, Events } from 'ionic-angular';
 
 import { Item } from '../../models/item';
-import { Items } from '../../providers';
+import { Items, Api } from '../../providers';
+import { StatusBar } from '@ionic-native/status-bar';
+import { Game } from '../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -10,24 +12,29 @@ import { Items } from '../../providers';
   templateUrl: 'game-master.html'
 })
 export class GameMasterPage {
-  currentItems: Item[];
+  games: Array<Game> = [];
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
-    this.currentItems = this.items.query();
-  }
+  constructor(public navCtrl: NavController, 
+    public items: Items, 
+    public modalCtrl: ModalController,
+    public statusBar: StatusBar,
+    public db: Api,
+    public zone: NgZone,
+    public event: Events) {
 
-  /**
-   * The view loaded, let's query our items for the list
-   */
-  ionViewDidLoad() {
+    this.games = this.db.GAMES.slice(0);
+    this.event.subscribe('update:games', () => {
+      this.zone.run(() => {
+        this.games = this.db.GAMES.slice(0);
+      });
+    })
   }
-  
 
   newGame() {
     let addModal = this.modalCtrl.create('ItemCreatePage');
     addModal.onDidDismiss(item => {
       if (item) {
-        this.items.add(item);
+        this.db.addGame(item);
       }
     })
     addModal.present();

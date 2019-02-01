@@ -8,22 +8,45 @@
 
 
 <ion-content class="dark-bg">
-  <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.img + ')'">
+  <div class="item-profile" text-center #avatar [style.background-image]="'url(' + item.img + ')'">
   </div>
 
   <div class="item-detail" padding>
-    <h2>{{item.date}}</h2>
+    <h2>{{item._dateReadable}}</h2>
     <p>{{item.place}}</p>
   </div>
 
   <ion-list>
-    <ion-item-sliding *ngFor="let player of activePlayers" >
-      <ion-item class="player-list">
+    <ion-item-sliding *ngFor="let pg of activePlayerGame; let i = index" >
+      <ion-item class="player-list" *ngIf="pg">
         <ion-avatar item-start>
-            <img class="avatar-img" [src]="player.image" />
+            <img class="avatar-img" [src]="activePlayers[i].avatar" />
         </ion-avatar>
-        <h2>{{player.name}}</h2>
-        <p>SMASHES: {{player.smashes}}</p>
+        <ion-col>
+          <h2>{{activePlayers[i].name}}</h2>
+        </ion-col>
+        <ion-col>
+          <p>
+            SMASHES: {{pg.smashes}} 
+            <button ion-button float-right color="third" class="ar-button">
+                <ion-icon slot="icon-only" name="remove"></ion-icon>
+            </button>
+            <button ion-button float-right color="third" class="ar-button">
+                <ion-icon slot="icon-only" name="add"></ion-icon>
+            </button>
+          </p>
+        </ion-col>
+        <ion-col>
+          <p>
+            DOUBLERS: {{pg.doubler}}
+            <button ion-button float-right color="third" class="ar-button">
+                <ion-icon slot="icon-only" name="remove"></ion-icon>
+            </button>
+            <button ion-button float-right color="third" class="ar-button">
+                <ion-icon slot="icon-only" name="add"></ion-icon>
+            </button>
+          </p>
+        </ion-col>
       </ion-item>
 
       <ion-item-options>
@@ -32,6 +55,12 @@
         </button>
       </ion-item-options>
     </ion-item-sliding>
+    <ion-item class="player-list" (click)="addPlayerToGame()">
+        <ion-icon item-start name="add" color="third"></ion-icon>
+        <h2>
+            Spieler hinzufügen
+        </h2>
+    </ion-item>
   </ion-list>
 
 </ion-content>
