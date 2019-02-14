@@ -65,7 +65,7 @@ export class Api {
       return actions.map(a => {
         let data = a.payload.doc.data();
         let d = new Date(data.date);
-        data._dateReadable = `${d.getFullYear()}`+"-"+(`0${d.getMonth() + 1}`).slice(-2)+"-"+(`0${d.getDay()}`).slice(-2);
+        data._dateReadable = `${d.getFullYear()}`+"-"+(`0${d.getMonth() + 1}`).slice(-2)+"-"+(`0${d.getDate()}`).slice(-2);
         data._id = a.payload.doc.id;
         return data;      
         });
