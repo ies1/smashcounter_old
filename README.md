@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.com/ies1/smashcounter.svg?branch=master)](https://travis-ci.com/ies1/smashcounter)
+
+
 # The Super Smash - Smash Counter 🎮
 
 <img src="https://cdn02.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_4/H2x1_NSwitch_SuperSmashBrosUltimate_02_image1600w.jpg" width="600" />
