@@ -106,7 +106,7 @@ export class ItemDetailPage {
   }
 
   remSmash(pg: PlayerGame, p: Player) {
-    if (p.smashes > 0 && p.smashes > 0) {
+    if (pg.smashes > 0 && p.smashes > 0) {
 
       console.log('old smash count', p.smashes, pg.smashes);
 
@@ -132,7 +132,7 @@ export class ItemDetailPage {
   addDoubler(pg: PlayerGame, p: Player) {
     console.log('old doubler count', p.smashes, pg.doubler);
 
-    p.smashes = p.smashes + 2;
+    p.smashes = p.smashes + 3;
     pg.doubler = pg.doubler + 1;
 
     this.db.playersRef.doc(`${p._id}`).update({smashes: p.smashes})
@@ -153,8 +153,8 @@ export class ItemDetailPage {
   remDoubler(pg: PlayerGame, p: Player) {
     console.log('old doubler count', p.smashes, pg.doubler);
 
-    if (p.smashes > 1 && pg.doubler > 0) {
-      p.smashes = p.smashes - 2;
+    if (p.smashes > 2 && pg.doubler > 0) {
+      p.smashes = p.smashes - 3;
       pg.doubler = pg.doubler - 1;
 
       this.db.playersRef.doc(`${p._id}`).update({smashes: p.smashes})
