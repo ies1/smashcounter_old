@@ -1,5 +1,7 @@
 {
   "name": "SmashCounter",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }

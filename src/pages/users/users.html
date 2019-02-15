@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'PLAYER_TITLE' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-slides pager="true" dir="{{dir}}">
+    <ion-slide class="slide-gradient" *ngFor="let slide of slides">
+        <h2 class="slide-content slide-title" [innerHTML]="slide.name"></h2>
+      <img [src]="slide.avatar" class="slide-image" />
+      <p class="slide-content slide-text-title">SMASHES</p>
+      <p class="slide-content slide-text" [innerHTML]="slide.smashes"></p>
+      <p class="slide-content slide-text-title">GAMES</p>
+      <p class="slide-content slide-text" [innerHTML]="slide.games"></p>
+      <p class="slide-content slide-text-title">WINS</p>
+      <p class="slide-content slide-text" [innerHTML]="slide.wins"></p>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-fab right bottom>
+    <button ion-fab mini color="secondary" (click)="newPlayer()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+  
+</ion-content>

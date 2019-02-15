@@ -1,0 +1,94 @@
+page-user-create {
+    form {
+        height: 100%;
+    }
+
+    .toolbar-background {
+        background-color: map-get($colors, secondary)!important;
+    }
+
+    .toolbar-title {
+        color: whitesmoke;
+    }
+
+    .item {
+        background-color: transparent !important;
+        color: whitesmoke !important;
+    }
+
+    .profile-image-wrapper {
+        text-align: center;
+        margin: 20px 0;
+        height: 50%;
+
+        color: whitesmoke;
+    
+        .profile-image {
+          width: 96px;
+          height: 100%;
+          border-radius: 7px;
+    
+          display: inline-block;
+    
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+        }
+    
+        .profile-image-placeholder {
+          display: inline-block;
+    
+          background-color: transparent;
+          width: 96px;
+          height: 96px;
+          border-radius: 7px;
+    
+          font-size: 12px;
+    
+          ion-icon {
+            font-size: 44px;
+            margin-bottom: -10px;
+            margin-top: 10px;
+          }
+        }
+    }
+
+    .scroll-zoom-wrapper {
+        white-space: nowrap;
+    }
+
+    ion-card {
+        display: inline-block;
+        width: 35% !important;
+        background: transparent !important;
+    }
+
+    ion-card-title {
+        color: whitesmoke !important;
+        font-size: 16px !important;
+        text-overflow: ellipsis !important;
+        overflow: hidden !important; 
+    }
+
+    ion-card img {
+        margin-top: -16px;
+        margin: auto;
+        height: auto;
+        width: 100%;
+    }
+
+    ion-scroll {
+        min-height: 500px; 
+        height: auto;
+
+            .scroll-content {
+            padding: 0px !important;
+        }    
+    }
+
+    .activeAvatar{
+        -webkit-box-shadow: 0px 14px 32px 0px rgba(33, 212, 90, 0.6);
+        -moz-box-shadow: 0px 14px 32px 0px rgba(33, 212, 90, 0.6);
+        box-shadow: 0px 14px 32px 0px rgba(33, 212, 90, 0.6);
+    }
+}

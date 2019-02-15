@@ -14,3 +14,116 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+h1, h2, h3 {
+    font-family: medium-content-sans-serif-font,"Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Arial,sans-serif;
+}
+
+body, p {
+  font-family: medium-content-serif-font,Georgia,Cambria,"Times New Roman",Times,serif;
+  letter-spacing: .01rem;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 1.58;
+  letter-spacing: -.004em;
+              
+}
+
+textarea {
+  min-height: 120px;
+}
+
+ion-content.content {
+  background-color: #f8f9fa;
+}
+
+.md {
+.special-fab {
+  &.-bottom {
+      bottom: 4px;
+  }
+}
+}
+
+.ios {
+.special-fab {
+  &.-bottom {
+      bottom: 1px;
+  }
+}
+}
+
+.blog-details, .notifications-details {
+      color: #93a0b3;
+      font-size: 14px;
+  }
+
+.tags {
+      > span {
+          display: inline-block;
+          background-color: color($colors, grey);
+          padding: 5px;
+          text-transform: uppercase;
+          color: $text-color;
+          font-size: 1rem;
+          border-radius: 5px;
+          & + span {
+              margin-left: 5px;
+          }
+      }
+  }
+
+  // .tabs-md .tab-button[aria-selected=true] ion-icon:nth-of-type(1) {
+  //   color: red;
+  // }
+
+  a.tab-button[aria-selected=true]:nth-of-type(1) {
+    color: map-get($colors, danger);
+    .tab-button-icon {
+      color: map-get($colors, danger);
+    }
+  }
+
+  a.tab-button[aria-selected=true]:nth-of-type(2) {
+    color: map-get($colors, secondary);
+    .tab-button-icon {
+      color: map-get($colors, secondary);
+    }
+  }
+
+  a.tab-button[aria-selected=true]:nth-of-type(3) {
+    color: map-get($colors, primary);
+    .tab-button-icon {
+      color: map-get($colors, primary);
+    }
+  }
+  a.tab-button[aria-selected=false] {
+    color: #f8f9fa;
+    .tab-button-icon {
+      color: #f8f9fa;
+    }
+  }
+
+  .tabbar {
+    background: linear-gradient(40deg,#555,#333) !important;
+  }
+
+  .dark-bg {
+    background: linear-gradient(40deg,#555,#000);
+  }
+
+  .bar-button {
+    color:whitesmoke !important;
+  }
+
+  ion-icon {
+    font-size: 1.6em !important;
+  }
+
+  // .playerTab > .tabs-md .tab-button[aria-selected=true] .tab-button-icon  {
+  //   color: green;
+  // }
+
+  // .statsTab > .tabs-md .tab-button[aria-selected=true] .tab-button-icon  {
+  //   color: blue;
+  // }
