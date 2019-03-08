@@ -56,8 +56,8 @@ export class Api {
       return actions.map(a => {
         let data = a.payload.doc.data();
         data._id = a.payload.doc.id;
-        return data;      
-        });
+        return data;
+      });
     });
 
     this.gamesRef = this.db.collection<Game>('games');
@@ -65,10 +65,10 @@ export class Api {
       return actions.map(a => {
         let data = a.payload.doc.data();
         let d = new Date(data.date);
-        data._dateReadable = `${d.getFullYear()}`+"-"+(`0${d.getMonth() + 1}`).slice(-2)+"-"+(`0${d.getDate()}`).slice(-2);
+        data._dateReadable = `${d.getFullYear()}` + "-" + (`0${d.getMonth() + 1}`).slice(-2) + "-" + (`0${d.getDate()}`).slice(-2);
         data._id = a.payload.doc.id;
-        return data;      
-        });
+        return data;
+      });
     });
 
     this.player_gameRef = this.db.collection<PlayerGame>('player_game');
@@ -76,8 +76,8 @@ export class Api {
       return actions.map(a => {
         let data = a.payload.doc.data();
         data._id = a.payload.doc.id;
-        return data;      
-        });
+        return data;
+      });
     });
 
     this.subscribeEvents();
@@ -89,6 +89,7 @@ export class Api {
       for (let i = 0; i < players.length; i++) {
         this.PLAYERS.push(players[i]);
       }
+      this.PLAYERS.sort(this.sortPlayer);
       this.event.publish('update:players');
     });
 
@@ -97,6 +98,7 @@ export class Api {
       for (let i = 0; i < games.length; i++) {
         this.GAMES.push(games[i]);
       }
+      this.GAMES.sort(this.sortGame);
       this.event.publish('update:games');
     });
 
@@ -117,8 +119,24 @@ export class Api {
     this.gamesRef.add(game);
   }
 
-  addPlayerGame(pg:PlayerGame) {
+  addPlayerGame(pg: PlayerGame) {
     this.player_gameRef.add(pg);
+  }
+
+  sortPlayer(p1: Player, p2: Player) {
+    if (p1.name < p2.name)
+      return -1;
+    if (p1.name > p2.name)
+      return 1;
+    return 0;
+  }
+
+  sortGame(g1: Game, g2: Game) {
+    if (g1.date > g2.date)
+      return -1;
+    if (g1.date < g2.date)
+      return 1;
+    return 0;
   }
 
 }
