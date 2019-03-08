@@ -10,7 +10,7 @@ import { Player, Api, PlayerGame } from '../../providers/api/api';
   templateUrl: 'item-detail.html'
 })
 export class ItemDetailPage {
-  
+
   item: any;
   players: Array<Player> = [];
   activePlayers: Array<Player> = [];
@@ -18,15 +18,14 @@ export class ItemDetailPage {
   activePlayerGame: Array<PlayerGame> = [];
 
   rotatedImg: any;
-  
 
-  constructor(public navCtrl: NavController, 
-              navParams: NavParams, 
-              public statusBar: StatusBar,
-              public db: Api,
-              public zone: NgZone,
-              public event: Events,
-              public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController,
+    navParams: NavParams,
+    public statusBar: StatusBar,
+    public db: Api,
+    public zone: NgZone,
+    public event: Events,
+    public modalCtrl: ModalController) {
 
     this.item = navParams.get('item');
 
@@ -58,7 +57,7 @@ export class ItemDetailPage {
           this.activePlayerGame.push(pg);
           this.activePlayers.push(this.getPlayersForGame(pg.player.id));
         });
-      } 
+      }
     }
   }
 
@@ -89,17 +88,25 @@ export class ItemDetailPage {
 
     p.smashes = p.smashes + 1;
     pg.smashes = pg.smashes + 1;
+    pg.total = pg.total + 1;
 
-    this.db.playersRef.doc(`${p._id}`).update({smashes: p.smashes})
+    this.db.playersRef.doc(`${p._id}`).update({ smashes: p.smashes })
       .then(() => {
         console.log('new smash overall count', p.smashes);
       }).catch((err) => {
         console.error("ERROR DURING UPDATE", err);
       });
-    
-    this.db.player_gameRef.doc(`${pg._id}`).update({smashes: pg.smashes})
+
+    this.db.player_gameRef.doc(`${pg._id}`).update({ smashes: pg.smashes })
       .then(() => {
         console.log('new smash count', pg.smashes);
+      }).catch((err) => {
+        console.error("ERROR DURING UPDATE", err);
+      });
+
+    this.db.player_gameRef.doc(`${pg._id}`).update({ total: pg.total })
+      .then(() => {
+        console.log('new total count', pg.smashes);
       }).catch((err) => {
         console.error("ERROR DURING UPDATE", err);
       });
@@ -112,17 +119,25 @@ export class ItemDetailPage {
 
       p.smashes = p.smashes - 1;
       pg.smashes = pg.smashes - 1;
+      pg.total = pg.total - 1;
 
-      this.db.playersRef.doc(`${p._id}`).update({smashes: p.smashes})
+      this.db.playersRef.doc(`${p._id}`).update({ smashes: p.smashes })
         .then(() => {
           console.log('new smash overall count', p.smashes);
         }).catch((err) => {
           console.error("ERROR DURING UPDATE", err);
         });
-      
-      this.db.player_gameRef.doc(`${pg._id}`).update({smashes: pg.smashes})
+
+      this.db.player_gameRef.doc(`${pg._id}`).update({ smashes: pg.smashes })
         .then(() => {
           console.log('new smash count', pg.smashes);
+        }).catch((err) => {
+          console.error("ERROR DURING UPDATE", err);
+        });
+
+      this.db.player_gameRef.doc(`${pg._id}`).update({ total: pg.total })
+        .then(() => {
+          console.log('new total count', pg.total);
         }).catch((err) => {
           console.error("ERROR DURING UPDATE", err);
         });
@@ -134,17 +149,25 @@ export class ItemDetailPage {
 
     p.smashes = p.smashes + 3;
     pg.doubler = pg.doubler + 1;
+    pg.total = pg.total + 3;
 
-    this.db.playersRef.doc(`${p._id}`).update({smashes: p.smashes})
+    this.db.playersRef.doc(`${p._id}`).update({ smashes: p.smashes })
       .then(() => {
         console.log('new smash overall count', p.smashes);
       }).catch((err) => {
         console.error("ERROR DURING UPDATE", err);
       });
 
-    this.db.player_gameRef.doc(`${pg._id}`).update({doubler: pg.doubler})
+    this.db.player_gameRef.doc(`${pg._id}`).update({ doubler: pg.doubler })
       .then(() => {
         console.log('new doubler count', pg.doubler);
+      }).catch((err) => {
+        console.error("ERROR DURING UPDATE", err);
+      });
+
+    this.db.player_gameRef.doc(`${pg._id}`).update({ total: pg.total })
+      .then(() => {
+        console.log('new total count', pg.total);
       }).catch((err) => {
         console.error("ERROR DURING UPDATE", err);
       });
@@ -153,20 +176,29 @@ export class ItemDetailPage {
   remDoubler(pg: PlayerGame, p: Player) {
     console.log('old doubler count', p.smashes, pg.doubler);
 
-    if (p.smashes > 2 && pg.doubler > 0) {
+    if (p.smashes > 3 && pg.doubler > 0) {
       p.smashes = p.smashes - 3;
       pg.doubler = pg.doubler - 1;
+      pg.total = pg.total - 3;
 
-      this.db.playersRef.doc(`${p._id}`).update({smashes: p.smashes})
+
+      this.db.playersRef.doc(`${p._id}`).update({ smashes: p.smashes })
         .then(() => {
           console.log('new smash overall count', p.smashes);
         }).catch((err) => {
           console.error("ERROR DURING UPDATE", err);
         });
 
-      this.db.player_gameRef.doc(`${pg._id}`).update({doubler: pg.doubler})
+      this.db.player_gameRef.doc(`${pg._id}`).update({ doubler: pg.doubler })
         .then(() => {
           console.log('new doubler count', pg.doubler);
+        }).catch((err) => {
+          console.error("ERROR DURING UPDATE", err);
+        });
+
+      this.db.player_gameRef.doc(`${pg._id}`).update({ total: pg.total })
+        .then(() => {
+          console.log('new total count', pg.total);
         }).catch((err) => {
           console.error("ERROR DURING UPDATE", err);
         });
