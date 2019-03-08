@@ -28,6 +28,7 @@ export interface PlayerGame {
   smashes: number,
   doubler: number,
   tripplos: number,
+  total: number,
   win: boolean
 }
 
@@ -107,6 +108,7 @@ export class Api {
       for (let i = 0; i < pg.length; i++) {
         this.PLAYER_GAME.push(pg[i]);
       }
+      this.PLAYER_GAME.sort(this.sortPlayerGame)
       this.event.publish('update:player_game');
     });
   }
@@ -139,4 +141,11 @@ export class Api {
     return 0;
   }
 
+  sortPlayerGame(pg1: PlayerGame, pg2: PlayerGame) {
+    if (pg1.total > pg2.total)
+      return -1;
+    if (pg1.total < pg2.total)
+      return 1;
+    return 0
+  }
 }

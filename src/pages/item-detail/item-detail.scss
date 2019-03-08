@@ -32,8 +32,12 @@ page-item-detail {
     margin-top: 110px !important;
   }
 
-  h2, p {
-    color: whitesmoke;
+  h2 {
+    color: whitesmoke !important;
+  }
+
+  p {
+    color: lightgray !important;
   }
 
   .avatar-img {
@@ -47,5 +51,23 @@ page-item-detail {
     margin-top: -2px;
     height: 100%;
     width: 20px;
+  }
+
+  .player-total {
+    position: relative;
+    float: right;
+    margin-right: 16px;
+    margin-top: -44px;
+    color: whitesmoke;
+    font-size: 2.0em;
+    width: 50px;
+    text-align: center;
+  }
+
+  .winning-crown {
+    height: 50px;
+    position: absolute;
+    margin-top: -41px;
+    margin-left: -23px;
   }
 }

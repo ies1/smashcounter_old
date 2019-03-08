@@ -71,7 +71,8 @@ export class PlayerAddPage {
       smashes: 0,
       doubler: 0,
       tripplos: 0,
-      win: false
+      win: false,
+      total: 0
     });
 
     console.log('old games count', player.games);

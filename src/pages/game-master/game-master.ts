@@ -44,7 +44,7 @@ export class GameMasterPage {
    * Delete an item from the list of items.
    */
   deleteItem(item) {
-    this.items.delete(item);
+    //this.items.delete(item);
   }
 
   /**

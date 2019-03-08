@@ -47,11 +47,15 @@
             </button>
           </p>
         </ion-col>
+        <div class="player-total">
+          <div *ngIf="i == 0"><img class="winning-crown" src="assets/img/crown.png" /></div>
+          {{pg.total}}
+        </div>
       </ion-item>
 
       <ion-item-options>
         <button ion-button color="third">
-          Entfernen
+          NIX
         </button>
       </ion-item-options>
     </ion-item-sliding>
